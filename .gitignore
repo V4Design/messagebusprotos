@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs
+/restingprotos/.vs/v4demo_simulation_rest/v15/Server/sqlite3
+/restingprotos/bin
+/restingprotos/obj

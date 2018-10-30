@@ -1,0 +1,32 @@
+syntax = "proto3";
+//package edu.upf.taln.v4design.proto;
+package v4design.protos.taln;
+message AnalysisResult {
+    string text = 1;
+    repeated Concept concepts = 2;
+}
+message Concept{
+    int32 begin = 1;
+    int32 end = 2;
+    string text = 3;
+    
+    oneof ConceptInfo{
+        DBpediaConceptInfo DBpediaInfo = 4;
+        BabelNetConceptInfo BabelNetInfo = 5;
+        NerConceptInfo NerInfo = 6;
+    }
+}
+message DBpediaConceptInfo {
+    string uri = 1;
+    string types = 2;
+    string simpleTypes = 3;
+}
+message BabelNetConceptInfo {
+    string id = 1;
+    string description = 2;
+    double confidence = 3;
+}
+message NerConceptInfo {
+    string types = 1;
+    string simpleTypes = 2;
+}
