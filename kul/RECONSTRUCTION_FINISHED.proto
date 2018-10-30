@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package v4d.reconstruction;
+
+message ContentInfo{ //TBD
+    string sourceId = 1;
+}
+message UUID { //TBD
+    string id = 1;
+}
+
+
+message MeshInfo{
+    //reserved 1;
+    //unique meshid
+    UUID meshId = 1;
+
+    //format
+    MeshFormat format = 2;
+
+    //mesh specs
+    uint32 faceCount = 3;
+    uint32 textureCount = 4;
+
+    //parent reconstruction id
+    UUID reconstructionId = 5;
+
+    enum MeshFormat{
+        OTHER = 0;
+        OBJ = 1;
+        PLY_BINARY = 2;
+        PLY_ASCII = 3;
+    }
+}
+
+
+message ReconstructionInfo{	
+    //unique reconstruction id
+    UUID reconstructionId = 1;
+
+    //group id, equal group ids in reconstructions = same scale
+    UUID reconstructionGroupId = 2;
+
+    //all input content
+    repeated ContentInfo inputContent = 3;
+
+    //used content, eg. matched
+    repeated ContentInfo usedContent = 4;
+
+    //visual AnalysisMask collisions, eg "tower" "trees" "statue" "building" "window" etc.
+    repeated string visual_analysis_tags = 5;
+}
+
+message SimulationExample2_reconstructionfound{
+    // array of reconstrutions
+    repeated ReconstructionInfo reconstructions = 1;
+}
+
+message SimulationExample2_reconstructionTagUpdate{
+    // unique reconstruction id
+    UUID reconstructionId = 1;
+
+    // new list of all tags²
+    repeated string visual_analysis_tags = 2;
+}
